@@ -1,3 +1,4 @@
+import '../styles/App.css'
 // React
 import React, { Component, Fragment } from 'react';
 
@@ -13,8 +14,8 @@ class App extends Component {
             <Fragment>
                <Header/>
                {/* <LeaseComponent/> */}
-               <Footer/>
-               {/* <Sidebar/> */}
+               {/* <Footer/> */}
+               <Sidebar/>
             </Fragment>
         );
     }
