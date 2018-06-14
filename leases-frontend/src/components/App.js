@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
-import { Lease }  from './Lease'
+// React
+import React, { Component, Fragment } from 'react';
+
+// application components
+import { LeaseComponent }  from './LeaseComponent'
+import  { Header, Footer, Sidebar } from '../layouts'
+
+
 
 class App extends Component {
     render() {
         return (
-            <div className="App">
-                <Lease />    
-            </div>
+            <Fragment>
+               <Header/>
+               {/* <LeaseComponent/> */}
+               <Footer/>
+               {/* <Sidebar/> */}
+            </Fragment>
         );
     }
 }
 
-export default App;
+export default App
