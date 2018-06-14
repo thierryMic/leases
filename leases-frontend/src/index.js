@@ -11,27 +11,17 @@ import store from './stores/LeaseStore';
 
 // Material-ui
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { Theme } from './layouts'
-
-import JssProvider from 'react-jss/lib/JssProvider';
-import { create } from 'jss';
-
-
-const generateClassName = createGenerateClassName();
-const jss = create(jssPreset());
-jss.options.insertionPoint = 'jss-insertion-point';
 
 
 ReactDOM.render(
                 <BrowserRouter>
                     <Provider store={store}>
-                        <JssProvider jss={jss} generateClassName={generateClassName}>
-                            <MuiThemeProvider theme={Theme}>
-                                <CssBaseline/>
-                                <App />
-                            </MuiThemeProvider>
-                        </JssProvider>
+                        <MuiThemeProvider theme={Theme}>
+                            <CssBaseline/>
+                            <App />
+                        </MuiThemeProvider>
                     </Provider>
                 </BrowserRouter>,
                 document.getElementById('root')
