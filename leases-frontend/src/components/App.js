@@ -4,27 +4,23 @@ import React, { Component } from 'react';
 // application components
 import LeaseComponent from './LeaseComponent'
 import  { Header, Sidebar } from '../layouts'
-
+import {sideBarWidth} from '../layouts/Sidebar'
 import { withStyles } from '@material-ui/core/styles';
+
 
 const styles = theme => ({
     app: {
-        // display: 'flex',
-        // height: 2000,
-        // overflow: 'hidden',
-        flexGrow: 1,
-    height: 430,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-
+        height: 2000,
+        zIndex: 1,
+        overflow: 'hidden',
+        display: 'flex',
     },
     content: {
         display: 'flex',
         flexDirection: 'column',
-        left: '15em',
-        position:'relative'
+        left: sideBarWidth,
+        position:'relative',
+        top: 64
     },
     toolbar: theme.mixins.toolbar,
 
@@ -33,13 +29,16 @@ const styles = theme => ({
 class App extends Component {
 
     render() {
+
         const { app, content, toolbar } = this.props.classes
+
         return (
             <div className={app}>
-               <Header/>
-               <Sidebar/>
-               <div className={content}>
-                    <div className={toolbar} />
+
+                <Header/>
+                <Sidebar/>
+                <div className={content}>
+
                     <LeaseComponent/>
                     <LeaseComponent/>
                     <LeaseComponent/>

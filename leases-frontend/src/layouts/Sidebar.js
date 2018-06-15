@@ -7,17 +7,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
 
-
+export const sideBarWidth = '15em'
 const styles = theme => ({
 
     drawerPaper: {
-      width: '15em',
-      zIndex: 0
+      width: sideBarWidth,
+      zIndex: 0,
     },
 
     toolbar: theme.mixins.toolbar,
   })
-
 
 function SideBar(props) {
     const { classes } = props
