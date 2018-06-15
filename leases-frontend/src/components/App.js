@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -9,13 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SidebarItem from './SidebarItem'
-// import Hidden from '@material-ui/core/Hidden';
 
 
-const drawerWidth = '10em'
+const drawerWidthOpen = '10em'
+const drawerWidthClosed = '3.1em'
 
-
-const styles = theme => ({
+const styles = (theme, props) => ({
     root: {
         flexGrow: 1,
         height: 2000,
@@ -27,10 +25,6 @@ const styles = theme => ({
 
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
     },
 
     menuButton: {
@@ -38,53 +32,59 @@ const styles = theme => ({
     },
 
     drawerPaper: {
-        // position: 'relative',
         whiteSpace: 'nowrap',
-        width: drawerWidth,
+        width: drawerWidthOpen,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
+
     drawerPaperClose: {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        width: theme.spacing.unit * 6.2,
-        [theme.breakpoints.up('sm')]: {
-        //   width: theme.spacing.unit * 6.2,
-        },
+        width: drawerWidthClosed,
     },
 
     toolbar: {
-    //   display: 'flex',
-    //   alignItems: 'center',
-    //   justifyContent: 'flex-end',
-    //   padding: '0 16px',
-      ...theme.mixins.toolbar,
+        ...theme.mixins.toolbar,
     },
-  //   content: {
-  //     flexGrow: 1,
-  //     backgroundColor: theme.palette.background.default,
-  //     padding: theme.spacing.unit * 3,
-  //   },
+
+    content: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        position: 'absolute',
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        transition: theme.transitions.create('left'),
+        width: 'calc(100% - ' + drawerWidthClosed + ')',
+        left: drawerWidthClosed,
+        padding: '1em',
+    },
+
+    contentOpen : {
+        width: 'calc(100% - ' + drawerWidthOpen + ')',
+        left: drawerWidthOpen,
+    }
+
 });
 
 class App extends React.Component {
-    state = { open: false };
+    state = {open: false};
 
     handleDrawerOpen = () => {
-        this.setState({ open: true });
+        this.setState({open: true,});
     };
 
     handleDrawerClose = () => {
-        this.setState({ open: false });
+        this.setState({open: false});
     };
 
     render() {
-        const { classes, theme } = this.props;
+        const { classes } = this.props
 
         return (
         <div className={classes.root}>
@@ -93,7 +93,6 @@ class App extends React.Component {
                 <Toolbar disableGutters>
                     <IconButton
                     color="secondary"
-                    aria-label="open drawer"
                     onClick={this.state.open ? this.handleDrawerClose : this.handleDrawerOpen}
                     className={classNames(classes.menuButton)}
                     >
@@ -116,9 +115,9 @@ class App extends React.Component {
             </Drawer>
 
             {/* Content pane */}
-            <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+            <main className={classNames(classes.content, this.state.open && classes.contentOpen)}>
+                <div className={classes.toolbar} style={{width: '100%'}} />
+                <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
             </main>
         </div>
         );
