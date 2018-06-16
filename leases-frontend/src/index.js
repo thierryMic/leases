@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
+import App from './components/main/App'
 
 // react-router
 import { BrowserRouter } from 'react-router-dom'
@@ -12,7 +12,7 @@ import store from './stores/LeaseStore';
 // Material-ui
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { Theme } from './layouts'
+import Theme from './styles/Theme'
 
 
 ReactDOM.render(

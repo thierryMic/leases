@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SidebarItem from './SidebarItem'
+import LeaseComponent from '../lease/LeaseComponent';
 
 
 const drawerWidthOpen = '10em'
@@ -117,7 +118,7 @@ class App extends React.Component {
             {/* Content pane */}
             <main className={classNames(classes.content, this.state.open && classes.contentOpen)}>
                 <div className={classes.toolbar} style={{width: '100%'}} />
-                <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+                <LeaseComponent/>
             </main>
         </div>
         );

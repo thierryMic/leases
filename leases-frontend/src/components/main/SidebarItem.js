@@ -3,8 +3,8 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { ListItem } from '@material-ui/core';
-import { Iconer } from '../utils/Iconer'
 import { withStyles } from '@material-ui/core/styles';
+import { Iconer } from '../../utils/Iconer'
 
 const styles = theme => ({
     listItem:{
