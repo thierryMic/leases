@@ -9,7 +9,10 @@ const Theme = createMuiTheme({
     secondary: {
         main: '#ba000d'
       }
-  }
+  },
+  typography: {
+    fontSize: 12,
+  },
 })
 
 export default Theme

@@ -58,12 +58,15 @@ const styles = (theme, props) => ({
         display: 'flex',
         flexWrap: 'wrap',
         position: 'absolute',
-        flexGrow: 1,
+        // flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         transition: theme.transitions.create('left'),
-        width: 'calc(100% - ' + drawerWidthClosed + ')',
-        left: drawerWidthClosed,
         padding: '1em',
+        width:'100%',
+        [theme.breakpoints.up('sm')]: {
+            left: drawerWidthClosed,
+            width: 'calc(100% - ' + drawerWidthClosed + ')',
+          },
     },
 
     contentOpen : {
