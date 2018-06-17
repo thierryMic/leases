@@ -36,7 +36,7 @@ class LeaseComponent extends React.Component {
 
     render () {
         const { root, paper, container, fieldPadding, flexColumn } = this.props.classes
-        const { leaseId, type, leaseItem, startDate, expiryDate } = this.props.store.lease
+        const { leaseId, type, leaseItem, startDate, expiryDate, term } = this.props.store.lease
         const { lease } = this.props.store
 
         return (
@@ -91,6 +91,14 @@ class LeaseComponent extends React.Component {
                             value={expiryDate}
                             onChange={(e) => this.handleChange(e, lease)}
                             InputLabelProps={{shrink:true}}
+                        />
+
+                        {/* Term */}
+                        <TextField
+                            name="term"
+                            label="Lease term (years)"
+                            className={fieldPadding}
+                            value={term}
                         />
 
                     </form>
