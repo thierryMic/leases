@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import classNames from 'classnames'
 import { Selecter } from '../../utils/Selecter'
+import { observer, inject } from 'mobx-react'
 
 
 const styles = theme => ({
@@ -14,7 +15,6 @@ const styles = theme => ({
     },
     paper: {
         padding: theme.spacing.unit * 2,
-        // textAlign: 'left',
         color: theme.palette.text.secondary,
     },
     flexColumn:{
@@ -23,34 +23,25 @@ const styles = theme => ({
     },
     fieldPadding: {
         marginTop: '1em',
-        // width: '2em',
       },
 })
 
 
+const LeaseComponent = inject("store")(observer(
 class LeaseComponent extends React.Component {
 
-    state = {
-        leaseId: '<auto>',
-        leaseItem: '',
-        type: '',
-        startDate: '',
-        expiryDate: '',
-    }
-
-    handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
-        // console.log(event.target)
+    handleChange = (e, lease) => {
+        lease[e.target.name]= e.target.value
     }
 
     render () {
         const { root, paper, container, fieldPadding, flexColumn } = this.props.classes
-        const { leaseId, type, leaseItem, startDate, expiryDate } = this.state
+        const { leaseId, type, leaseItem, startDate, expiryDate } = this.props.store.lease
+        const { lease } = this.props.store
 
         return (
             <div className={root}>
             <Grid container spacing={24}>
-
                 <Grid item xs={12} sm={6}>
                     <Paper className={paper}>
                     <form className={classNames(container, flexColumn)} noValidate autoComplete="off">
@@ -60,7 +51,6 @@ class LeaseComponent extends React.Component {
                             label="Lease id"
                             className={fieldPadding}
                             value={leaseId}
-                            // margin="normal"
                         />
 
                         {/* Lease item */}
@@ -69,8 +59,7 @@ class LeaseComponent extends React.Component {
                             label="Lease item"
                             className={fieldPadding}
                             value={leaseItem}
-                            onChange={this.handleChange}
-                            // margin="normal"
+                            onChange={(e) => this.handleChange(e, lease)}
                         />
 
                         {/* Lease type */}
@@ -78,7 +67,7 @@ class LeaseComponent extends React.Component {
                             xid='type'
                             values={['Property', 'Equipment']}
                             val={type}
-                            handleChange={this.handleChange}
+                            handleChange={(e) => this.handleChange(e, lease)}
                             xClass={fieldPadding}
                         />
 
@@ -89,7 +78,7 @@ class LeaseComponent extends React.Component {
                             label="Start date"
                             className={fieldPadding}
                             value={startDate}
-                            onChange={this.handleChange}
+                            onChange={(e) => this.handleChange(e, lease)}
                             InputLabelProps={{shrink:true}}
                         />
 
@@ -100,24 +89,24 @@ class LeaseComponent extends React.Component {
                             label="Expiry date"
                             className={fieldPadding}
                             value={expiryDate}
-                            onChange={this.handleChange}
+                            onChange={(e) => this.handleChange(e, lease)}
                             InputLabelProps={{shrink:true}}
                         />
 
                     </form>
                     </Paper>
-
                 </Grid>
-
-
             </Grid>
             </div>
         )
     }
-}
+}))
+
+
 
 LeaseComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 }
+
 
 export default withStyles(styles)(LeaseComponent)

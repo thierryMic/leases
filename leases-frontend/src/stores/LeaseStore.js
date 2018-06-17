@@ -1,8 +1,9 @@
 import { decorate, observable } from 'mobx'
+import Lease from './Lease'
 
 
 class LeaseStore  {
-    leases = [{id: 2, Address: '820 Mountain highway'}]
+    lease = new Lease()
 
     addLease = (val) => {
         this.leases.push(val)
@@ -11,7 +12,7 @@ class LeaseStore  {
 }
 
 decorate(LeaseStore, {
-    leases: observable,
+    lease: observable
 })
 
 var store = new LeaseStore()
